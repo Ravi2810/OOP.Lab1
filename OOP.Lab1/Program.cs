@@ -2,13 +2,14 @@
 using System;
 using OOP.Lab1.Particles;
 using OOP.Lab1.ModelComponents;
+using OOP.Lab1.Materials;
 
 namespace OOP.Lab1
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
+	class Program
+	{
+		static void Main(string[] args)
+		{
 			DispersionData dData;
 			dData.LaData = new double[] { -2.22e-7, 9260.0, 0.0 };
 			dData.TaData = new double[] { -2.28e-7, 5240.0, 0.0 };
@@ -24,18 +25,34 @@ namespace OOP.Lab1
 
 			Material silicon = new Material(in dData, in rData);
 
+			Model model = new Model(silicon, 800, 100, 10);
+
+			int numCells = 10;
+			for (int i = 0; i < numCells; ++i)
+			{
+				//To add sensor and cell into model object
+				model.AddSensor(i, 460);
+				model.AddCell(11, 12, i);
+
+			}
+			//To setsurface and phonons 
+			model.SetSurfaces(400);
+			model.SetEmitPhonons(400, 4, 3e-5);
+
+			Console.WriteLine(model);
+
 
 			Sensor s = new Sensor(1, silicon, 300);
 			Cell c = new Cell(10, 10, s);
-			Sensor s2= new Sensor(2, silicon, 300);
-			Cell c2= new Cell(1, 1, s2);
+			Sensor s2 = new Sensor(2, silicon, 300);
+			Cell c2 = new Cell(1, 1, s2);
 
 			Console.WriteLine(c);
 
 			for (int i = 0; i < 1000; ++i)
-            {
+			{
 				c.AddPhonon(new Phonon(-1));
-            }
+			}
 
 			c.TakeMeasurements(1e6, 300);
 
@@ -66,13 +83,13 @@ namespace OOP.Lab1
 			Console.WriteLine("Phonon properties after to emit surface collision");
 			Console.WriteLine(p2.Active);
 			Console.WriteLine(p2.DriftTime);
-			
+
 
 
 		}
-    }
+	}
 
-   
+
 
 
 

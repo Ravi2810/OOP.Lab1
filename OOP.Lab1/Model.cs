@@ -8,9 +8,8 @@
 
 using System;
 using System.Collections.Generic;
-
-using OOP.Lab1.ModelComponents;
 using OOP.Lab1.Materials;
+using OOP.Lab1.ModelComponents;
 
 namespace OOP.Lab1
 {
@@ -35,34 +34,34 @@ namespace OOP.Lab1
 			this.simTime = simTime;
 			tEq = (highTemp + lowTemp) / 2;
 		}
-		//to add sensor
-		public void AddSensor(int sensorID, double initTemp)
+		//Add Sensor
+		public void AddSensor(int senID, double initTem)
 		{
 			foreach (Sensor sensor in sensors)
 			{
-				if (sensor.ID == sensorID)
-					throw new ArgumentException($"Sensor Id: {sensorID} is not unique.");
+				if (sensor.ID == senID)
+					throw new ArgumentException($"Sensor Id: {senID} is not unique.");
 
 			}
-			sensors.Add(new Sensor(sensorID, material, initTemp));
+			sensors.Add(new Sensor(senID, material, initTem));
 		}
-		public void AddSensor(double initTemp)
+		public void AddSensor(double initTem)
 		{
 
 		}
 
 		// to add cell
-		public void AddCell(double length, double width, int sensorID)
+		public void AddCell(double length, double width, int senID)
 		{
 
 			if (cells.Count > 0)
 			{
 				if (cells[cells.Count - 1].Length != length || cells[cells.Count - 1].Width != width)
-					throw new ArgumentException($"cell dimention does not match the following length: {cells[cells.Count - 1].Length}, width: {cells[cells.Count - 1].Width}");
+					throw new ArgumentException($"Invalid: {cells[cells.Count - 1].Length}, width: {cells[cells.Count - 1].Width}");
 			}
 			foreach (var sensor in sensors)
 			{
-				if (sensor.ID == sensorID)
+				if (sensor.ID == senID)
 				{
 
 					cells.Add(new Cell(length, width, sensor));
@@ -71,9 +70,9 @@ namespace OOP.Lab1
 				}
 
 			}
-			throw new ArgumentException($"Sensor Id: {sensorID} does not exist in the model.");
+			throw new ArgumentException($"Sensor Id: {senID} is invalid.");
 		}
-		
+
 
 		/// <summary>
 		/// Automatically sets all the surfaces in the cells that constitute this model.
@@ -88,14 +87,15 @@ namespace OOP.Lab1
 				throw new InvalidCellCount();
 			}
 
-			cells[0].SetEmitSurface(SurfaceLocation.left, highTemp);
+			cells[0].SetEmitSurface(SurfaceLocation.left, highTemp, tEq);
 			cells[0].SetTransitionSurface(SurfaceLocation.right, cells[1]);
+
 			for (int i = 1; i < numCells - 1; ++i)
 			{
 				cells[i].SetTransitionSurface(SurfaceLocation.left, cells[i - 1]);
 				cells[i].SetTransitionSurface(SurfaceLocation.right, cells[i + 1]);
 			}
-			cells[^1].SetEmitSurface(SurfaceLocation.right, lowTemp);
+			cells[^1].SetEmitSurface(SurfaceLocation.right, lowTemp, tEq);
 			cells[^1].SetTransitionSurface(SurfaceLocation.left, cells[numCells - 2]);
 
 		}
@@ -141,7 +141,7 @@ namespace OOP.Lab1
 			res += $"model total energy: {GetTotalEnergy()}\n";
 			foreach (var cell in cells)
 			{
-				res += cell.ToString() + $"  {cell.TotalEmitPhonons()}" +'\n' ;
+				res += cell.ToString() + $"  {cell.TotalEmitPhonons()}" + '\n';
 			}
 			return res;
 		}

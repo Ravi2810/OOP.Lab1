@@ -9,7 +9,7 @@
  * Can you think of a clever way to remove an element from the middle of a List without having
  * to shift the memory contents of the List? 
  */
- 
+
 using System;
 using System.Collections.Generic;
 
@@ -30,8 +30,8 @@ namespace OOP.Lab1.ModelComponents
 	public class Cell : Rectangle
 	{
 		private const int NUM_SURFACES = 4;
-		private List<Phonon> phonons = new() { };
-		private List<Phonon> incomingPhonons = new() { };
+		private List<Phonon> phonons = new List<Phonon>() { };
+		private List<Phonon> incomingPhonons = new List<Phonon>() { };
 		private ISurface[] surfaces = new ISurface[NUM_SURFACES];
 		public List<Phonon> Phonons { get { return phonons; } }
 		private Sensor sensor;
@@ -110,6 +110,11 @@ namespace OOP.Lab1.ModelComponents
 		public Tuple<double, double>[] EmitData(double temp, out double emitEnergy)
 		{
 			return sensor.GetEmitData(temp, out emitEnergy);
+		}
+
+		internal object TotalEmitPhonons()
+		{
+			throw new NotImplementedException();
 		}
 
 		/// <summary>

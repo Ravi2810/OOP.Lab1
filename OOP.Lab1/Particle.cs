@@ -15,20 +15,20 @@ namespace OOP.Lab1.Particles
 		/// The default constructor sets the particle position and direction vector to (0,0)
 		/// and the speed to 0.
 		/// </summary>
-		public Particle() 
+		public Particle()
 		{
-			
+
 		}
-		
+
 		public Particle(Point position, Vector direction, double speed)
 		{
-            
-          
-				Position = position;
-				Direction = direction;
-				Speed = speed;
-			
-			
+
+
+			Position = position;
+			Direction = direction;
+			Speed = speed;
+
+
 		}
 		/// <summary>
 		/// Sets the particle's position in 2D space
@@ -47,7 +47,7 @@ namespace OOP.Lab1.Particles
 		public void GetCoords(out double px, out double py)
 		{
 
-			Position.GetCoords(out px, out  py);
+			Position.GetCoords(out px, out py);
 		}
 		/// <summary>
 		/// Sets the particle's direction vector
@@ -57,7 +57,7 @@ namespace OOP.Lab1.Particles
 		/// <exception cref="ArgumentOutOfRangeException">Throws if the x or y component is > 1 or < -1."</exception>
 		public void SetDirection(double dx, double dy)
 		{
-			
+
 			SetDirection(dx, dy);
 		}
 		/// <summary>

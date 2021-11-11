@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using OOP.Lab1.Materials;
 using OOP.Lab1.Particles;
 
 namespace OOP.Lab1
@@ -35,7 +36,7 @@ namespace OOP.Lab1
 			return Material.EmitData(temp, out energy);
 		}
 
-		public void TakeMeasurements(List<Phonon> phonons ,double effEnergy, double tEq)
+		public void TakeMeasurements(List<Phonon> phonons, double effEnergy, double tEq)
 		{
 			int energyUnits = 0;
 			double xFlux = 0;

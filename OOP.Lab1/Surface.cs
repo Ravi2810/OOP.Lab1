@@ -25,7 +25,9 @@ namespace OOP.Lab1.ModelComponents
 		}
 		public virtual Cell HandlePhonon(Phonon p)
 		{
-			Vector direction = p.Direction;
+			double dx, dy;
+			p.GetDirection(out dx, out dy);
+			Vector direction = new Vector(dx, dy);
 			if (Location == SurfaceLocation.left || Location == SurfaceLocation.right)
 			{
 				p.SetDirection(-direction.DX, direction.DY);

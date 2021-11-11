@@ -2,16 +2,16 @@
 using System;
 using System.Linq;
 
-namespace OOP.Lab1
+namespace OOP.Lab1.Materials
 {
 	public class Material
 	{
 		private static Random rand = new Random();
 
 		private const uint NUM_FREQ_BINS = 1000;
-		private const double HBAR = 1.054517e-34; 
+		private const double HBAR = 1.054517e-34;
 		private const double BOLTZ = 1.38065e-23;
-		
+
 		private double[] frequencies = new double[NUM_FREQ_BINS];
 		private double[] densitiesLA = new double[NUM_FREQ_BINS];
 		private double[] densitiesTA = new double[NUM_FREQ_BINS];
