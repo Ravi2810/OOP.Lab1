@@ -15,6 +15,7 @@ using System.Collections.Generic;
 
 using OOP.Lab1.Geometry2D;
 using OOP.Lab1.Particles;
+using OOP.Lab1.Materials;
 
 namespace OOP.Lab1.ModelComponents
 {

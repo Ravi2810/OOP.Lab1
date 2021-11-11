@@ -25,7 +25,7 @@ namespace OOP.Lab1.ModelComponents
 		}
 		public virtual Cell HandlePhonon(Phonon p)
 		{
-            Vector direction = p.Direction;
+			Vector direction = p.Direction;
 			if (Location == SurfaceLocation.left || Location == SurfaceLocation.right)
 			{
 				p.SetDirection(-direction.DX, direction.DY);
@@ -40,10 +40,8 @@ namespace OOP.Lab1.ModelComponents
 
 	public class TransitionSurface : BoundarySurface
 	{
-		public TransitionSurface(SurfaceLocation location, Cell cell) : base(location, cell)
-		{
+		public TransitionSurface(SurfaceLocation location, Cell cell) : base(location, cell) { }
 
-		}
 		/// <summary>
 		/// When a phonon collides with a transition surface, it passes from
 		/// one cell to the adjacent cell. This method updates the phonon's coordinates
@@ -53,6 +51,7 @@ namespace OOP.Lab1.ModelComponents
 		/// <returns>The new cell in which the phonon will reside</returns>
 		public override Cell HandlePhonon(Phonon p)
 		{
+			// Thanks Christian
 			p.GetCoords(out double px, out double py);
 			if (Location is SurfaceLocation.top)
 			{
@@ -81,9 +80,10 @@ namespace OOP.Lab1.ModelComponents
 		public double Temp { get; }
 		public int EmitPhonons { get; private set; }
 		public double EmitPhononsFrac { get; private set; }
+
 		public EmitSurface(SurfaceLocation location, Cell cell, double temp) : base(location, cell)
 		{
-			Temp = temp;
+			this.Temp = temp;
 			EmitTable = cell.EmitData(temp, out emitEnergy);
 		}
 
@@ -99,6 +99,7 @@ namespace OOP.Lab1.ModelComponents
 			p.Active = false;
 			return cell;
 		}
+
 		public double GetEmitEnergy(double tEq, double simTime, double length)
 		{
 			return emitEnergy * length * simTime / 4 * Math.Abs(Temp - tEq);
@@ -114,14 +115,13 @@ namespace OOP.Lab1.ModelComponents
 		public void SetEmitPhonons(double tEq, double effEnergy, double timeStep, double length)
 		{
 			double emitPhonons = GetEmitEnergy(tEq, timeStep, length) / effEnergy;
+			// Thanks Andrew
 			EmitPhonons = (int)Math.Floor(emitPhonons);
 			EmitPhononsFrac = emitPhonons - EmitPhonons;
-			//TODO: Implement -> need to split the double emitPhonons into it's
-			// integer component (EmitPhonons) and its
-			// fractional component (EmitPhononsFrac)
 		}
 
 	}
+
 
 
 
